@@ -1,33 +1,41 @@
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 interface WaveformVisualizerProps {
   isActive: boolean;
+  audioLevel?: number;
   className?: string;
 }
 
-const WaveformVisualizer = ({ isActive, className }: WaveformVisualizerProps) => {
-  const bars = 24;
+const WaveformVisualizer = ({ isActive, audioLevel = 0, className }: WaveformVisualizerProps) => {
+  const [bars, setBars] = useState<number[]>(Array(20).fill(8));
+  
+  useEffect(() => {
+    if (!isActive) {
+      setBars(Array(20).fill(8));
+      return;
+    }
+    
+    const interval = setInterval(() => {
+      setBars(prev => prev.map(() => {
+        const base = audioLevel > 0 ? audioLevel * 50 : Math.random() * 40;
+        return Math.max(8, base + Math.random() * 20);
+      }));
+    }, 100);
+    
+    return () => clearInterval(interval);
+  }, [isActive, audioLevel]);
   
   return (
-    <div className={cn("flex items-center justify-center gap-1 h-16", className)}>
-      {Array.from({ length: bars }).map((_, i) => (
-        <motion.div
+    <div className={cn("flex items-end justify-center gap-1 h-16", className)}>
+      {bars.map((height, i) => (
+        <div
           key={i}
           className={cn(
-            "w-1 rounded-full",
-            i % 3 === 0 ? "bg-cyan" : i % 3 === 1 ? "bg-magenta" : "bg-yellow"
+            "w-1.5 transition-all duration-100",
+            i % 2 === 0 ? "bg-cyan" : "bg-magenta"
           )}
-          initial={{ height: 8 }}
-          animate={isActive ? {
-            height: [8, Math.random() * 48 + 16, 8],
-          } : { height: 8 }}
-          transition={{
-            repeat: isActive ? Infinity : 0,
-            duration: 0.3 + Math.random() * 0.3,
-            delay: i * 0.02,
-            ease: "easeInOut",
-          }}
+          style={{ height: `${height}px` }}
         />
       ))}
     </div>

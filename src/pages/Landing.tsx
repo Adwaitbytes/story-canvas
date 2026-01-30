@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import LanguageButton from "@/components/ui/LanguageButton";
 import { Play } from "lucide-react";
@@ -20,59 +19,34 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6">
       {/* Background grid */}
-      <div className="fixed inset-0 grid-bg opacity-30 pointer-events-none" />
+      <div className="fixed inset-0 grid-bg opacity-40 pointer-events-none" />
 
       {/* Main Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative z-10 text-center max-w-4xl"
-      >
-        {/* Logo / Brand Mark */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="mb-12"
-        >
-          <div className="inline-block px-4 py-2 border-[3px] border-cyan mb-6">
-            <span className="font-display text-sm font-bold uppercase tracking-brutal text-cyan">
+      <div className="relative z-10 text-center max-w-4xl">
+        {/* Logo */}
+        <div className="mb-12">
+          <div className="inline-block px-4 py-2 border-[3px] border-cyan bg-cyan mb-6">
+            <span className="font-display text-sm font-bold uppercase tracking-wide text-primary-foreground">
               StoryBridge
             </span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Hero Text */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight mb-4"
-        >
+        <h1 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight mb-4">
           <span className="text-foreground">Speak Your Story.</span>
           <br />
-          <span className="text-glow-cyan text-cyan">See It Come Alive.</span>
-        </motion.h1>
+          <span className="text-cyan">See It Come Alive.</span>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="font-mono text-lg text-muted-foreground mb-16 max-w-xl mx-auto"
-        >
+        <p className="font-mono text-lg text-muted-foreground mb-16 max-w-xl mx-auto">
           Transform your voice into professional storyboards. 
           No screenplay format needed. Just tell your story.
-        </motion.p>
+        </p>
 
         {/* Language Selection */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-          className="space-y-8"
-        >
-          <p className="font-display text-sm font-bold uppercase tracking-brutal text-muted-foreground">
+        <div className="space-y-8">
+          <p className="font-display text-sm font-bold uppercase tracking-wide text-muted-foreground">
             Choose Your Language
           </p>
           
@@ -86,54 +60,29 @@ const Landing = () => {
               />
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Demo Link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="mt-16"
-        >
-          <button className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground hover:text-cyan transition-colors group">
-            <Play className="w-4 h-4 group-hover:text-cyan" />
+        <div className="mt-16">
+          <button className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Play className="w-4 h-4" />
             See how it works
           </button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      {/* Decorative Elements */}
-      <motion.div
-        className="fixed bottom-8 left-8 font-mono text-xs text-muted-foreground"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-      >
+      {/* Footer text */}
+      <div className="fixed bottom-8 left-8 font-mono text-xs text-muted-foreground">
         <span className="text-cyan">●</span> Voice-First Storytelling
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="fixed bottom-8 right-8 font-mono text-xs text-muted-foreground"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-      >
+      <div className="fixed bottom-8 right-8 font-mono text-xs text-muted-foreground">
         For Vernacular Filmmakers
-      </motion.div>
+      </div>
 
-      {/* Floating accent lines */}
-      <motion.div
-        className="fixed top-1/4 left-8 w-px h-32 bg-gradient-to-b from-cyan to-transparent"
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
-      />
-      <motion.div
-        className="fixed top-1/3 right-8 w-px h-24 bg-gradient-to-b from-magenta to-transparent"
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-      />
+      {/* Accent lines */}
+      <div className="fixed top-1/4 left-8 w-px h-32 bg-cyan" />
+      <div className="fixed top-1/3 right-8 w-px h-24 bg-magenta" />
     </div>
   );
 };
